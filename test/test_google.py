@@ -12,7 +12,7 @@ options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(options=options)
 
 driver.maximize_window()
-driver.get("https://marca.com")
+driver.get("https://demoqa.com/")
 print("Navegador abierto sin ventanas emergentes de cookies.")
 
 inicio_sesion_xpath = "//a[text()='Suscríbete']"
