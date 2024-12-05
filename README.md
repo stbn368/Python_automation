@@ -12,7 +12,7 @@ Este proyecto implementa pruebas automatizadas utilizando Selenium, Behave (BDD)
 - Soporte para hooks (before_all y after_all) para inicialización y limpieza de recursos.
 
 ## 📂 Estructura del Proyecto
-
+```plaintext
 project/
 ├── features/
 │   ├── steps/
@@ -24,6 +24,7 @@ project/
 │   ├── home.feature          # Pruebas relacionadas con la página de inicio
 │   └── login.feature         # Pruebas relacionadas con el inicio de sesión
 └── README.md                 # Documentación del proyecto
+```
 
 ## 🛠️ Instalación y Configuración
 
