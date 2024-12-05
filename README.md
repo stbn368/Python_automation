@@ -37,15 +37,16 @@ project/
 # Configuración del entorno virtual
 
 Crea y activa un entorno virtual:
-
+```plaintext
 python -m venv venv
 source venv/bin/activate   # En macOS/Linux
 venv\Scripts\activate      # En Windows
+```
 
 Instala las dependencias:
-
+```plaintext
 pip install -r requirements.txt
-
+```
 # Configuración de variables de entorno (opcional)
 
 Si necesitas configuraciones específicas, puedes usar un archivo .env para almacenar variables como la URL base o credenciales.
@@ -54,37 +55,37 @@ Si necesitas configuraciones específicas, puedes usar un archivo .env para alma
 
 # Ejecutar todas las pruebas
 Para ejecutar todas las pruebas, usa:
-
+```plaintext
 behave
-
+```
 # Ejecutar un archivo .feature específico
-
+```plaintext
 behave features/home.feature
-
+```
 # Ejecutar un escenario específico
-
+```plaintext
 behave -n "Nombre del Escenario"
-
+```
 ## ⚙️ Configuración
 
 Todas las configuraciones del proyecto (como URL base, tiempos de espera, etc.) están centralizadas en el archivo configuration.py. Aquí hay un ejemplo:
-
+```plaintext
 BASE_URL = "http://uitestingplayground.com/home"
 IMPLICIT_WAIT = 10
 EXPLICIT_WAIT = 15
-
+```
 ## 🖥️ Ejemplo de Uso
 # Escenario de ejemplo: Navegar a la página de inicio y verificar un botón
 
 Archivo: home.feature
-
+```plaintext
 Feature: Home Page Verification
   Scenario: Verify button interaction on home page
     When I click the button with id "homeButton"
     Then I should see the text "Welcome to the Playground" on the page
-
+```
 Archivo: steps/button.py
-
+```plaintext
 from behave import when, then
 
 @when('I click the button with id "{button_id}"')
@@ -95,7 +96,7 @@ def click_button(context, button_id):
 @then('I should see the text "{expected_text}" on the page')
 def verify_text_on_page(context, expected_text):
     assert expected_text in context.driver.page_source, f"'{expected_text}' not found on page"
-
+```
 
 ## 📄 Licencia
 
