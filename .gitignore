@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+*.env
+venv/
+.virtualenv/
+ENV/
+env/
+.venv/
+
+# Pytest
+.cache/
+
+# Test reports and logs
+reports/
+*.log
+*.xml
+*.html
+allure-results/
+allure-report/
+
+# IDE Specific
+.vscode/
+.idea/
+*.iml
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Selenium and WebDriver
+*.exe  # Si subiste drivers (como chromedriver.exe)
+selenium.log
+
+# Python-specific
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+pip-log.txt
+lib/
+lib64/
+
+# Behave Specific
+*.feature~
+output/
+
+# Configuration Files (Add your own)
+config.py  # Si tienes configuraciones sensibles que no quieres compartir públicamente
