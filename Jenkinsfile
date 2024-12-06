@@ -5,18 +5,14 @@ pipeline {
             steps {
                 // Crear entorno virtual e instalar dependencias
                 bat 'python -m venv venv'
-                bat 'venv\\Scripts\\activate && pip install -r requirements.txt'
+                bat 'call venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
         stage('Ejecutar Pruebas') {
             steps {
-                bat '''
-                    venv\\Scripts\\activate
-                    behave --format=pretty
-                    '''
+                // Activar entorno virtual y ejecutar pruebas
+                bat 'call venv\\Scripts\\activate && behave --format=pretty'
             }
-        }
-
         }
         stage('Publicar Resultados') {
             steps {
