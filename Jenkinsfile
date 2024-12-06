@@ -15,7 +15,7 @@ pipeline {
                     behave --format=pretty
                     '''
             }
-}
+        }
 
         }
         stage('Publicar Resultados') {
