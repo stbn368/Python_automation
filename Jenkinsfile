@@ -3,31 +3,35 @@ pipeline {
     stages {
         stage('Preparar Entorno') {
             steps {
-                script {
-                    bat 'python -m venv venv'
-                    bat 'call venv\\Scripts\\activate && pip install --upgrade pip setuptools'
-                    bat 'call venv\\Scripts\\activate && pip install -r requirements.txt'
-                }
+                // Crear entorno virtual e instalar dependencias
+                bat 'python -m venv venv'
+                bat 'call venv\\Scripts\\activate && pip install --upgrade pip setuptools'
+                bat 'call venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
         stage('Ejecutar Pruebas') {
             steps {
-                script {
-                    bat 'call venv\\Scripts\\activate && behave --format=pretty'
-                }
+                // Activar entorno virtual y ejecutar pruebas
+                bat 'call venv\\Scripts\\activate && behave --format=pretty'
             }
         }
         stage('Publicar Resultados') {
             steps {
-                // Publicar resultados aquí
+                // Archivar capturas de pantalla y reportes
+                archiveArtifacts artifacts: 'screenshots/*.png', fingerprint: true
+                publishHTML([allowMissing: false,
+                             alwaysLinkToLastBuild: true,
+                             keepAll: true,
+                             reportDir: 'reports',
+                             reportFiles: 'report.html',
+                             reportName: 'Reporte de Pruebas'])
             }
         }
     }
     post {
         always {
-            script {
-                bat 'rmdir /S /Q venv'
-            }
+            // Limpiar el entorno virtual
+            bat 'rmdir /S /Q venv'
         }
     }
 }
