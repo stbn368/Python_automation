@@ -5,7 +5,7 @@ pipeline {
             steps {
                 // Crear entorno virtual e instalar dependencias
                 bat 'python -m venv venv'
-                bat 'call venv\\Scripts\\activate && pip install --upgrade pip setuptools'
+                bat 'call venv\\Scripts\\activate && venv\\Scripts\\python.exe -m pip install --upgrade pip setuptools'
                 bat 'call venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
