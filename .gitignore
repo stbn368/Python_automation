@@ -22,6 +22,7 @@ reports/
 *.html
 allure-results/
 allure-report/
+screenshots/
 
 # IDE Specific
 .vscode/

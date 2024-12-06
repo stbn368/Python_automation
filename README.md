@@ -98,6 +98,22 @@ def verify_text_on_page(context, expected_text):
     assert expected_text in context.driver.page_source, f"'{expected_text}' not found on page"
 ```
 
+## Ejemplo generando reporte
+# Formato JSON
+
+Ejecuta tus pruebas con las opciones --format y --outfile:
+```plaintext
+behave --format=json --outfile=report.json
+```
+Esto creará un archivo report.json con los resultados. Puedes abrir este archivo o procesarlo para generar reportes personalizados.
+
+# Utilizando herramiendo Allure
+
+Ejecuta Behave con el formato Allure: Agrega el formateador de Allure y define un directorio de salida:
+```plaintext
+behave --format=allure_behave.formatter:AllureFormatter --outfile=allure-results
+```
+
 ## 📄 Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
