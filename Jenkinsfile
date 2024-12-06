@@ -10,9 +10,13 @@ pipeline {
         }
         stage('Ejecutar Pruebas') {
             steps {
-                // Ejecutar pruebas
-                bat 'venv\\Scripts\\activate && behave --format=pretty'
+                bat '''
+                    venv\\Scripts\\activate
+                    behave --format=pretty
+                    '''
             }
+}
+
         }
         stage('Publicar Resultados') {
             steps {
