@@ -4,14 +4,14 @@ pipeline {
         stage('Preparar Entorno') {
             steps {
                 // Crear entorno virtual e instalar dependencias
-                sh 'python -m venv venv'
-                sh '. venv/bin/activate && pip install -r requirements.txt'
+                bat 'python -m venv venv'
+                bat 'venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
         stage('Ejecutar Pruebas') {
             steps {
                 // Ejecutar pruebas
-                sh '. venv/bin/activate && behave --format=pretty'
+                bat 'venv\\Scripts\\activate && behave --format=pretty'
             }
         }
         stage('Publicar Resultados') {
@@ -30,7 +30,7 @@ pipeline {
     post {
         always {
             // Limpiar el entorno virtual
-            sh 'rm -rf venv'
+            bat 'rmdir /S /Q venv'
         }
     }
 }
