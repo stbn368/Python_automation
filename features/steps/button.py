@@ -11,10 +11,10 @@ def click_button(context, button_id):
         print(f'Step failed. {type(e).__name__} - {str(e)}')
         raise
         
-@then('Verify button text {button_text} exists')
-def verify_button_text(context, button_text):
+@then('Verify button text {text} exists')
+def verify_button_text(context, text):
     try:
-        xpath = f"//button[normalize-space(text())='{button_text}']"
+        xpath = f"//button[normalize-space(text())='{text}']"
         element = context.driver.find_element(By.XPATH, xpath)
     except Exception as e:
         print(f'Step failed. {type(e).__name__} - {str(e)}')
