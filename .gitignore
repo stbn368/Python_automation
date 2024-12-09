@@ -23,6 +23,7 @@ reports/
 allure-results/
 allure-report/
 screenshots/
+decrypted_notes/
 
 # IDE Specific
 .vscode/
