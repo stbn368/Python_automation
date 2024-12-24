@@ -1,5 +1,4 @@
-from behave import given, when, then
-from selenium import *
+from behave import then
 from selenium.webdriver.common.by import *
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
