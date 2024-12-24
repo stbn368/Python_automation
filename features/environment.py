@@ -38,10 +38,6 @@ def after_scenario(context, scenario):
         else:
             reporte.write(f"Scenario '{scenario.name}' FAILED\n")
             
-            # Create a screenshot directory if it does not exist
-            '''if not os.path.exists(os.path.pardir, "screenshots"):
-                os.makedirs("screenshots")'''
-            
             # Take screenshot
             screenshot_filename = os.path.join(screenshot_address, f"{scenario_name}_{timestamp_screenshot}.png")
             context.driver.save_screenshot(screenshot_filename)
