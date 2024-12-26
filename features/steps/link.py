@@ -1,5 +1,4 @@
-from behave import given, when, then
-from selenium import *
+from behave import *
 from selenium.webdriver.common.by import *
 
 @when('Click on the link with text "{text}"')

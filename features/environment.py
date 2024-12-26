@@ -9,7 +9,8 @@ def before_all(context):
     chromedriver_autoinstaller.install()
     context.driver = webdriver.Chrome()
     context.driver.implicitly_wait(Config.IMPLICIT_WAIT)
-    context.driver.maximize_window()
+    #context.driver.maximize_window()
+    context.driver.set_window_size(1920, 1080)
 
 
 def before_scenario(context, scenario):

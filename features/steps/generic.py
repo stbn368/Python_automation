@@ -1,5 +1,5 @@
-from behave import given, when, then
-from selenium.webdriver.common.by import By
+from behave import *
+from selenium.webdriver.common.by import *
 
 @given('Select the option "{text}" in the home page')
 def select_option(context, text):
