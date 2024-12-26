@@ -3,6 +3,7 @@ from selenium import *
 from selenium.webdriver.common.by import *
 
 @when('Click the button with id "{button_id}"')
+# Step to click on a button element using the id
 def click_button(context, button_id):
     try:
         button = context.driver.find_element("id", button_id)
@@ -12,6 +13,7 @@ def click_button(context, button_id):
         raise
         
 @then('Verify button text {text} exists')
+# Step to verify if a button exists looking for the text in the button
 def verify_button_text(context, text):
     try:
         xpath = f"//button[normalize-space(text())='{text}']"
