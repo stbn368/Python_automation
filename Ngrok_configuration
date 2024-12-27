@@ -1,0 +1,67 @@
+1. Configura ngrok
+    Inicia ngrok para exponer tu Jenkins local:
+
+    bash
+        ngrok http 8080
+
+    Esto generará una URL pública como: http://<SUBDOMINIO>.ngrok.io.
+    Copia la URL generada por ngrok, ya que la necesitarás para configurar el webhook en GitHub.
+
+2. Configura el Webhook en GitHub
+    Ve al repositorio en GitHub.
+    Dirígete a Settings > Webhooks > Add webhook.
+
+    En el campo Payload URL, introduce la URL de ngrok seguida de /github-webhook/:
+        http://<SUBDOMINIO>.ngrok.io/github-webhook/
+
+    En Content type, selecciona application/json.
+
+    En Which events would you like to trigger this webhook?, selecciona:
+        - "Just the push event" (para que se ejecute solo en cambios de código).
+        - O selecciona "Let me select individual events" para eventos específicos.
+
+    Haz clic en Add webhook.
+
+3. Configura Jenkins
+    Ve a Jenkins en tu navegador local: http://localhost:8080.
+
+    Selecciona tu proyecto y ve a Configure.
+
+    En la sección Build Triggers, marca:
+        GitHub hook trigger for GITScm polling
+
+    Esto le indica a Jenkins que escuche los eventos enviados desde GitHub.
+
+4. Verifica que Jenkins recibe el Webhook
+    Ve al repositorio en GitHub.
+    En Settings > Webhooks, selecciona el webhook configurado.
+    Haz clic en Recent Deliveries.
+    Envía una prueba con el botón Redeliver. Deberías ver un mensaje de éxito en GitHub y Jenkins debería reaccionar al webhook.
+
+5. Configura el Pipeline para Jenkins (Opcional)
+    Si usas un Jenkinsfile, asegúrate de que la configuración de tu pipeline sea compatible con el webhook. Por ejemplo:
+
+    pipeline {
+        agent any
+        triggers {
+            githubPush()
+        }
+        stages {
+            stage('Preparar Entorno') {
+                steps {
+                    echo 'Preparando entorno...'
+                }
+            }
+            stage('Construir') {
+                steps {
+                    echo 'Ejecutando pruebas...'
+                }
+            }
+        }
+    }
+
+Notas Importantes
+    Ngrok gratuito: La URL generada cambiará cada vez que reinicies ngrok. Si necesitas una URL persistente, puedes adquirir una cuenta de pago en ngrok.
+    Conexión estable: Asegúrate de que tu computadora esté encendida y ngrok esté ejecutándose cuando GitHub envíe el webhook.
+    Problemas de firewall: Si Jenkins no responde, verifica que no haya bloqueos en el puerto 8080 de tu PC.
+    Con estos pasos, tu Jenkins local estará configurado para ejecutar builds automáticamente cuando detecte cambios en el repositorio a través de ngrok.

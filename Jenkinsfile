@@ -16,28 +16,15 @@ pipeline {
         }
         stage('Ejecutar Pruebas') {
             steps {
-                // Activar entorno virtual y ejecutar pruebas con reporte
-                bat 'call venv\\Scripts\\activate && behave --format=html --outfile=reports/report.html'
+                // Activar entorno virtual y ejecutar pruebas con reporte Allure
+                bat 'call venv\\Scripts\\activate && behave -f allure_behave.formatter:AllureFormatter -o allure-results'
             }
         }
-        stage('Publicar Resultados') {
+        stage('Publicar Resultados de Allure') {
             steps {
-                script {
-                    // Verificar si existen capturas de pantalla antes de archivarlas
-                    def screenshotsExist = fileExists('screenshots/*.png')
-                    if (screenshotsExist) {
-                        archiveArtifacts artifacts: 'screenshots/*.png', fingerprint: true
-                    } else {
-                        echo 'No se encontraron capturas de pantalla para archivar.'
-                    }
-                }
-                publishHTML([
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'reports',
-                    reportFiles: 'report.html',
-                    reportName: 'Reporte de Pruebas'
+                // Publicar los resultados de Allure en Jenkins
+                allure([
+                    results: [[path: 'allure-results']]
                 ])
             }
         }
@@ -49,4 +36,3 @@ pipeline {
         }
     }
 }
-
