@@ -3,10 +3,12 @@ pipeline {
     stages {
         stage('Preparar Entorno') {
             steps {
+                // Configurar entorno virtual e instalar dependencias
+                bat 'python --version'
+                bat 'python -m venv venv'
                 bat '''
-                    python -m venv venv ^
-                    && call venv\\Scripts\\activate ^
-                    && pip install --upgrade pip setuptools wheel ^
+                    call venv\\Scripts\\activate ^
+                    && venv\\Scripts\\python.exe -m pip install --upgrade pip setuptools wheel ^
                     && pip install -r requirements.txt
                 '''
             }
