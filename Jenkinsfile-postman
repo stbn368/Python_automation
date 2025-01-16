@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+        stage('Preparar Entorno') {
+            steps {
+                bat '''
+                    python -m venv venv ^
+                    && call venv\\Scripts\\activate ^
+                    && pip install --upgrade pip setuptools wheel ^
+                    && pip install -r requirements.txt
+                '''
+            }
+        }
+        stage('Ejecutar Pruebas GET') {
+            steps {
+                bat '''
+                    call venv\\Scripts\\activate ^
+                    && python -m unittest discover -s features/Postman/GET -p "*.py"
+                '''
+            }
+        }
+        stage('Ejecutar Pruebas POST') {
+            steps {
+                bat '''
+                    call venv\\Scripts\\activate ^
+                    && python -m unittest discover -s features/Postman/POST -p "*.py"
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            // Limpiar entorno virtual
+            bat 'rmdir /S /Q venv'
+        }
+        success {
+            echo 'Las pruebas se ejecutaron correctamente.'
+        }
+        failure {
+            echo 'Algunas pruebas fallaron.'
+        }
+    }
+}
